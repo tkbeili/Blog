@@ -1,0 +1,29 @@
+<nav class="navbar navbar-inverse">
+  <ul class="nav navbar-nav">
+    <li class="active"><%= link_to("All Posts", posts_path) %></li>
+    <li class="active"><%= link_to("New Post", new_post_path) %></li>
+  </ul>
+  <ul>
+    <li>
+      <div class="pull-right">
+        <%= form_tag posts_path, :method => "get", class:"navbar-form navbar-left", role:"search" do  %>
+          <%= text_field_tag :search, params[:search]%>
+        <%= submit_tag "Search", class: "btn btn-info btn-sm"%>
+        <% end %>
+        <br>
+        <div class="pull-right sign-in-out">
+          <% if user_signed_in? %>
+            <%= current_user.first_name %>
+            |
+            <%= link_to("Logout", sessions_path, method: :delete) %>
+          <% else %>
+            <%= link_to("Sign Up", new_user_path) %>
+              |
+            <%= link_to("Sign In", new_session_path) %>
+           <% end %>
+           <%= link_to "My Favourites", post_favourites_path(:post_id) %>
+        </div>
+      </div>
+    </li>
+  </ul>
+</nav>

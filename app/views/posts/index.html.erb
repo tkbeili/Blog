@@ -1,0 +1,13 @@
+<h1>Posts</h1>
+<div class="post-resize">
+  <% @post.each do |post| %>
+  <div class:"list-group">
+    <hr>
+    <h4 class="list-group-item-heading"><%= link_to post.title, post_path(post) %></h4>
+      <p class="list-group-item-text">
+        <%= post.body.truncate(400, omission: '... (continued)') %>
+      </p>
+  </div>
+  <% end %>
+  <%= paginate(@post) %>
+</div>

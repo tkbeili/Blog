@@ -1,0 +1,98 @@
+.container {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+body {
+  background-image: url(/assets/dark_embroidery.png);
+}
+h1 {
+  color: white;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
+  padding: 20px;
+}
+h4 {
+  font-family: 'PT Sans', serif;
+  font-size: 20px;
+}
+h2 {
+   color: white;
+   font-family: 'Josefin Slab', serif;
+ }
+ h5 {
+   font-family: 'PT Sans', serif;
+ }
+p {
+  color: white;
+  font-family: 'PT Sans', sans-serif;
+}
+.created-by {
+  float: right;
+}
+
+ol {
+  color: white;
+}
+.tags {
+  color: white;
+  border-radius: 60px;
+}
+.label#tags-show {
+  border-radius: 40px;
+  margin-left: 3px;
+}
+.fa-star {
+  font-size: 0.5em;
+}
+.navbar-left {
+  font-size: 18px;
+}
+.navbar {
+  border-radius: 0px;
+  font-family: 'Josefin Slab', serif;
+}
+.comments {
+  color: #333333;
+}
+.sign-up {
+  font-family: 'Josefin Slab', serif;
+  color: black;
+}
+.sign-in-out-form h3{
+  text-align: center;
+  font-family: 'PT Sans', sans-serif;
+}
+.sign-in-out-form {
+  margin-left: 100px;
+  margin-right: 100px;
+  font-family: 'PT Sans', sans-serif;
+}
+h2.sign-up-in-form-head{
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+
+}
+.sign-in-out {
+  color: black;
+  padding-top: 22px;
+  font-size: 12px;
+}
+
+.post-resize {
+  margin-left: 50px;
+  margin-right: 50px;
+  color: white;
+}
+
+.navbar-right {
+  padding-right: 15px;
+}
+.new-post-resize {
+  font-family: 'PT Sans', sans-serif;
+  margin-left: 100px;
+  margin-right: 100px;
+}

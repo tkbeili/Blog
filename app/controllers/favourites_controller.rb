@@ -7,7 +7,8 @@ class FavouritesController < ApplicationController
     favourite.post  = post # taking the post(post_id) and setting it to favourite.post(post_id) on the favourite table
     favourite.user  = current_user # taking the current_user(user_id) and setting it to favourite.user(user_id) on the favourite table
     if favourite.save
-      redirect_to post_path(post), notice: "Favourited!"
+      FavouritesMailer.notify_post_owner_for_favourites(favourite).deliver_now
+      redirect_to post_path(post)
     else
       redirect_to post_path(post), notice: "Already favourited!"
     end
@@ -22,7 +23,7 @@ class FavouritesController < ApplicationController
     post        = Post.find params[:post_id]
     favourite   = current_user.favourites.find params[:id]
     favourite.destroy
-    redirect_to post_path(post), notice: "Favorite removed! =("
+    redirect_to post_path(post)
   end
 
 end

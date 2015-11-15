@@ -43,6 +43,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'pry-rails'
+  gem 'pry'
+  gem 'pry-nav'
 end
 
 group :development do
@@ -53,6 +55,7 @@ group :development do
   gem "awesome_print"
   gem "cowsay"
   gem "faker"
+  gem "letter_opener"
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

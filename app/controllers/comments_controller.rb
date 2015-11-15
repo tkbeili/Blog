@@ -7,6 +7,7 @@ before_action :authenticate_user, except:[:index, :show]
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
+      CommentsMailer.notify_post_owner(@comment).deliver_now
       redirect_to post_path(@post), notice: "Comment added. Wee!"
     else
       flash[:alert] = @comment.errors.full_messages.join(", ")

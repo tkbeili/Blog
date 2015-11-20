@@ -12,6 +12,7 @@
   <hr>
   <p><%= @post.body %></p>
   <hr>
+
   <!-- Tag -->
 <div class="tags">
   <% if @post.tags.any? %>
@@ -23,7 +24,18 @@
     <% end %>
   <% end %>
 </div>
+
+<!-- Image -->
+   <p>
+    <% if @post.image.present? %>
+      <%= image_tag @post.image.url(:medium) %>
+    <% else %>
+      <p><i>No image available</i></p>
+    <% end %>
+  </p> 
+
 <br>
+
   <div class="created-by">
     <% if @post.user %>
       <p> Created by:
@@ -32,6 +44,7 @@
     </p>
   </div>
 </div>
+
 <div class="post-resize">
   <% if can? :edit, @post %>
     <%= link_to "<i class='glyphicon glyphicon-pencil'></i> Edit".html_safe, edit_post_path(@post), class: "btn btn-info btn-sm" %>
@@ -41,21 +54,6 @@
   <% end %>
 </div>
 
-<!-- <h5>Vote Count: <%= @post.vote_counter %> </h5>
-  <div>
-    <%#if session[:has_voted] %>
-      You voted already!
-    <%#else %>
-    <%#= button_to "+", vote_up_post_path(@post) %>
-    <%# end %>
-  </div>
-  <div>
-    <%#if session[:has_voted] %>
-      You voted already!
-    <%# else %>
-    <%#= button_to "-", vote_down_post_path(@post), class:"btn-group btn-group-xs"  %>
-    <%# end %>
-  </div> -->
 <br>
 <div class="post-resize">
   <%= form_for [@post, @comment] do |f| %>
@@ -70,16 +68,49 @@
 </div>
 <br>
 <div class="post-resize">
-  <h4>Comments</h4>
-  <% @post.comments.each do |comment| %>
-    <div class="well well-sm comments">
-      <%= comment.body %>
-      <% if can? :destroy, comment %>
-        <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe,
-                            post_comment_path(@post, comment), method: :delete,
-                            class: "btn comment-delete btn-xs",
-                            data: {confirm: "Are you sure?"}) %>
+  <% if @post.comments.count < 5 %>
+    Comments
+    <% @post.comments.each do |comment| %>
+      <div class="comments comments-bg">
+        <% if can? :destroy, comment %>
+         <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe,
+                         post_comment_path(@post, comment), method: :delete,
+                         class: "comment-delete",
+                         data: {confirm: "Are you sure?"}) %>
+       <% end %>
+        <h4 class="user-name"><%= comment.user.first_name %></h4>
+          <p>
+            <%= comment.post.created_at.strftime("%B %d, %Y") %>
+          </p>
+          <p id="comments-body">
+            <%= comment.body %>
+          </p>
+      </div>
+      <% end %>
+    <% else %>
+  <button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Comments
+    <span class="badge"><%= @post.comments.count %></span>
+  </button>
+  <div class="collapse" id="collapseExample">
+    <% @post.comments.each do |comment| %>
+      <div class="comments comments-bg">
+        <% if can? :destroy, comment %>
+         <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe,
+                         post_comment_path(@post, comment), method: :delete,
+                         class: "comment-delete",
+                         data: {confirm: "Are you sure?"}) %>
+       <% end %>
+        <h4 class="user-name"><%= comment.user.first_name %></h4>
+          <p>
+            <%= comment.post.created_at.strftime("%B %d, %Y") %>
+          </p>
+          <p id="comments-body">
+            <%= comment.body %>
+          </p>
+      </div>
       <% end %>
     </div>
     <% end %>
+  </div>
 </div>

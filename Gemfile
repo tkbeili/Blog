@@ -8,6 +8,20 @@ gem 'kaminari'
 
 gem "font-awesome-rails"
 
+gem 'delayed_job_active_record'
+
+gem "delayed_job_web"
+
+gem 'omniauth-facebook'
+
+gem 'friendly_id'
+
+gem 'simple_form'
+
+gem 'mini_magick'
+
+gem 'carrierwave'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record

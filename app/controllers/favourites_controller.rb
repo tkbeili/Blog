@@ -3,11 +3,11 @@ class FavouritesController < ApplicationController
 
   def create
     favourite       = Favourite.new
-    post            = Post.find params[:post_id]
+    post            = Post.friendly.find params[:post_id]
     favourite.post  = post # taking the post(post_id) and setting it to favourite.post(post_id) on the favourite table
     favourite.user  = current_user # taking the current_user(user_id) and setting it to favourite.user(user_id) on the favourite table
     if favourite.save
-      FavouritesMailer.notify_post_owner_for_favourites(favourite).deliver_now
+      FavouritesMailer.delay(run_at: Date.today.noon + 10.hours).notify_post_owner_for_favourites(favourite)
       redirect_to post_path(post)
     else
       redirect_to post_path(post), notice: "Already favourited!"
@@ -20,7 +20,7 @@ class FavouritesController < ApplicationController
 
 # /posts/:post_id/favourites/:id
   def destroy
-    post        = Post.find params[:post_id]
+    post        = Post.friendly.find params[:post_id]
     favourite   = current_user.favourites.find params[:id]
     favourite.destroy
     redirect_to post_path(post)

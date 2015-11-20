@@ -13,10 +13,7 @@ h1 {
   text-align: center;
   padding: 20px;
 }
-h4 {
-  font-family: 'PT Sans', serif;
-  font-size: 20px;
-}
+
 h2 {
    color: white;
    font-family: 'Josefin Slab', serif;
@@ -27,6 +24,23 @@ h2 {
 p {
   color: white;
   font-family: 'PT Sans', sans-serif;
+}
+.comments p {
+  color: white;
+  font-size: 12px;
+}
+#comments-body {
+  font-size: 15px;
+}
+.comments-bg {
+background: rgba(107, 107, 107, .5);
+border-radius: 5px;
+}
+.comments-bg hr{
+  margin: 0px;
+}
+.comment-delete {
+  color: #D9534F;
 }
 .created-by {
   float: right;
@@ -55,6 +69,8 @@ ol {
 }
 .comments {
   color: #333333;
+  padding: 4px;
+  margin-bottom: 4px;
 }
 .sign-up {
   font-family: 'Josefin Slab', serif;
@@ -78,7 +94,7 @@ h2.sign-up-in-form-head{
 }
 .sign-in-out {
   color: black;
-  padding-top: 22px;
+  padding-top: 15px;
   font-size: 12px;
 }
 
@@ -86,6 +102,10 @@ h2.sign-up-in-form-head{
   margin-left: 50px;
   margin-right: 50px;
   color: white;
+}
+h4.post-resize a {
+  font-size: 15px;
+  margin-bottom: 15px;
 }
 
 .navbar-right {
@@ -95,4 +115,8 @@ h2.sign-up-in-form-head{
   font-family: 'PT Sans', sans-serif;
   margin-left: 100px;
   margin-right: 100px;
+}
+
+.user-name {
+  color: #5BC0DE;
 }

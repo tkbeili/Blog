@@ -2,11 +2,17 @@
 <div class="post-resize">
   <% @post.each do |post| %>
   <div class:"list-group">
-    <hr>
     <h4 class="list-group-item-heading"><%= link_to post.title, post_path(post) %></h4>
       <p class="list-group-item-text">
         <%= post.body.truncate(400, omission: '... (continued)') %>
       </p>
+      <% if post.user %>
+        <p class="created-by"> Created by:
+        <%= post.user.full_name %></p>
+        <% end %>
+      </p>
+      <br>
+      <hr>
   </div>
   <% end %>
   <%= paginate(@post) %>

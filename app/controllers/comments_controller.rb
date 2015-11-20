@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
 before_action :authenticate_user, except:[:index, :show]
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
     @comment = Comment.new(find_params)
     @comment.user = current_user
     @comment.post = @post

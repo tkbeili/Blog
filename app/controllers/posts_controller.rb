@@ -12,7 +12,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    post_params = params.require(:post).permit([:title, :body, {tag_ids:[]}])
+    post_params = params.require(:post).permit([:title, :body, {tag_ids:[]}, :image])
     @post = Post.new(post_params)
     @post.user = current_user
     if @post.save
@@ -23,7 +23,6 @@ class PostsController < ApplicationController
   end
 
   def show
-     @post = Post.find(params[:id])
     @comment = Comment.new
   end
 
@@ -33,8 +32,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    # @post = Post.find(params[:id])
-    post_params = params.require(:post).permit([:title, :body])
+    # this will make friendly id regenerate a slug for you
+    @post.slug = nil
+    post_params = params.require(:post).permit([:title, :body, :image])
     if @post.update(post_params)
       redirect_to post_path(@post), notice: "Post updated!"
     else
@@ -69,7 +69,10 @@ private
 
 
  def find_post
-   @post = Post.find(params[:id])
+  #  @post = Post.find(params[:id])
+   @post = Post.friendly.find(params[:id])
+   # this will redirect the user to the new url if friendly id found the question using an old slug  
+   redirect_to @post if @post.slug != params[:id]
  end
 
 end

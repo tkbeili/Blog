@@ -1,16 +1,8 @@
 <h2 class="sign-up-in-form-head">Sign Up</h2>
 
-<div class="sign-in-out-form well">
-  <% if @user.errors.any? %>
-    <ul>
-      <% @user.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-    </ul>
-  <% end %>
-
-
+<div class="sign-up-form well col-lg-6 col-centered col-sm-8 col-md-6 col-xs-12">
   <%= form_for @user do |f| %>
+  <%= render 'layouts/error_message' %>
     <div class="form-group">
       <%= f.label :first_name %>
       <%= f.text_field :first_name, class: "form-control" %>
@@ -32,5 +24,7 @@
       <%= f.password_field :password_confirmation, class: "form-control" %>
     </div>
     <%= f.submit class: "btn btn-primary" %>
+    <%= link_to "Cancel", root_path, class: "btn btn-default"%>
   <% end %>
 </div>
+

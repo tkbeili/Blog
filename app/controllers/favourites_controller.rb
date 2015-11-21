@@ -7,7 +7,7 @@ class FavouritesController < ApplicationController
     favourite.post  = post # taking the post(post_id) and setting it to favourite.post(post_id) on the favourite table
     favourite.user  = current_user # taking the current_user(user_id) and setting it to favourite.user(user_id) on the favourite table
     if favourite.save
-      FavouritesMailer.delay(run_at: Date.today.noon + 10.hours).notify_post_owner_for_favourites(favourite)
+      FavouritesMailer.delay(run_at: Date.today.noon + 8.hours).notify_post_owner_for_favourites(favourite)
       redirect_to post_path(post)
     else
       redirect_to post_path(post), notice: "Already favourited!"

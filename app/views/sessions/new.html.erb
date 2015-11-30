@@ -1,14 +1,29 @@
-<h4>Sign In</h4>
-<div class="well">
+<h2 class="sign-up-in-form-head">Welcome Back</h2>
+
+<div class="well sign-in-out-form col-lg-5 col-centered col-md-5 col-sm-6 col-xs-10">
+  <!-- Error message for sign-in -->
+  <% if flash[:alert] %>
+    <div class="alert alert-danger">
+      <ul>
+        <li><%= flash[:alert] %></li>
+      </ul>
+    </div>
+  <% end %> 
+
   <%= form_tag sessions_path do |f| %>
     <div class="form-group">
+      <i class="fa fa-envelope-o fa-fw"></i>
       <%= label_tag :email %>
       <%= email_field_tag :email,"", class: "form-control" %>
     </div>
     <div class="form-group">
+      <i class="fa fa-key fa-fw"></i>
       <%= label_tag :password %>
       <%= password_field_tag :password, "",class: "form-control" %>
     </div>
     <%= submit_tag "Sign In", class:"btn btn-primary" %>
+    <%= link_to "Cancel", root_path, class: "btn btn-default"%>
   <% end %>
+  <br>
+  New User? <%= link_to "Sign up Now!", new_user_path %>
 </div>

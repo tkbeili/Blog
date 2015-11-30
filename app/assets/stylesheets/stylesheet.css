@@ -1,0 +1,215 @@
+.container {
+  width: 100%;
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+body {
+  background-image: url(/assets/dark_embroidery.png);
+}
+h1 {
+  color: white;
+  font-family: 'Josefin Slab', serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/*Intro page*/
+h1.heading{
+  font-family: 'Josefin Slab', serif;
+  font-size: 60px;
+}
+p.intro-text {
+  font-size: 15px;
+  text-align: center;
+}
+
+header {
+  background: url(/assets/nyc.jpg) no-repeat center center scroll;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover; 
+  background-size: 100% 100%;
+}
+
+div.row {
+  padding: 100px 0;
+
+}
+
+@media(min-width:700px) {
+    .intro {
+        height: 100%;
+        padding: 0;
+    }
+
+    .intro .intro-body .heading {
+        font-size: 180px;
+    }
+
+    .intro .intro-body .intro-text {
+        font-size: 26px;
+    }
+}
+
+h2 {
+   color: white;
+   font-family: 'Josefin Slab', serif;
+ }
+ h5 {
+   font-family: 'PT Sans', serif;
+ }
+p {
+  color: white;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.comments p {
+  color: white;
+  font-size: 12px;
+}
+#comments-body {
+  font-size: 15px;
+}
+.comments-bg {
+background: rgba(107, 107, 107, .5);
+border-radius: 5px;
+}
+.comments-bg hr{
+  margin: 0px;
+}
+.comment-delete {
+  color: #D9534F;
+}
+.created-by {
+  float: right;
+}
+
+ol {
+  color: white;
+}
+.tags {
+  color: white;
+  border-radius: 60px;
+}
+.label#tags-show {
+  border-radius: 40px;
+  margin-left: 3px;
+}
+.fa-star {
+  font-size: 0.5em;
+}
+.navbar-left {
+  font-size: 18px;
+}
+.navbar {
+  border-radius: 0px;
+  font-family: 'Josefin Slab', serif;
+  margin-bottom: 0px;
+}
+
+.comments {
+  color: #333333;
+  padding: 4px;
+  margin-bottom: 4px;
+}
+.sign-up {
+  font-family: 'Josefin Slab', serif;
+  color: black;
+}
+
+/*Sign In form*/
+
+.sign-in-out-form h3{
+  text-align: center;
+  font-family: 'PT Sans', sans-serif;
+}
+.sign-in-out-form {
+  float: none;
+  margin: 0 auto;
+ font-family: 'PT Sans', sans-serif;
+}
+
+/*Sign Up Form*/
+h2.sign-up-in-form-head { 
+  color: white;
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.sign-up-form {
+  float: none;
+  margin: 0 auto;
+}
+
+
+/*Sign in/out link*/
+.sign-in-out {
+  color: black;
+  padding-top: 15px;
+  font-size: 12px;
+}
+
+.post-resize {
+  margin-left: 50px;
+  margin-right: 50px;
+  color: white;
+}
+h4.post-resize a {
+  font-size: 15px;
+  margin-bottom: 15px;
+}
+
+.navbar-right {
+  padding-right: 15px;
+}
+.new-post-resize {
+  font-family: 'PT Sans', sans-serif;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.user-name {
+  color: #5BC0DE;
+}
+
+.search{
+  color:black;
+}
+
+/*Buttons*/
+.btn {
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+}
+/*Form*/
+.form-group {
+  color: #666666;
+  padding-bottom: 10px;
+}
+.form-control{
+  background-color: transparent;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 2px solid #DDDDDD;
+  box-shadow: none;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+/*Error messages*/
+#error_explanation {
+  color: #d9534f;
+  ul {
+    color: #d9534f;
+    margin: 0 0 30px 0;
+  }
+}
+/*.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}*/
+

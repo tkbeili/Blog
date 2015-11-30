@@ -1,29 +1,58 @@
-<nav class="navbar navbar-inverse">
-  <ul class="nav navbar-nav">
-    <li class="active"><%= link_to("All Posts", posts_path) %></li>
-    <li class="active"><%= link_to("New Post", new_post_path) %></li>
-  </ul>
-  <ul>
-    <li>
-      <div class="pull-right">
-        <%= form_tag posts_path, :method => "get", class:"navbar-form navbar-left", role:"search" do  %>
-          <%= text_field_tag :search, params[:search]%>
-        <%= submit_tag "Search", class: "btn btn-info btn-sm"%>
-        <% end %>
-        <br>
-        <div class="pull-right sign-in-out">
+<nav class="navbar navbar-default">
+  <div class="container-nav">
+    <div class="navbar-header page-scroll">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <!-- <span class="sr-only">Toggle navigation</span> -->
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to fa_icon("home"), root_path, class: "navbar-brand" %>
+    </div>
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav navbar-left">
+        <li><%= link_to("All Posts", posts_path) %></li>
+        <li><%= link_to("New Post", new_post_path) %></li>
+      </ul>
+        <ul class="nav navbar-nav navbar-right">
+          <li>
+            <div>
+              <%= form_tag posts_path, :method => "get", class:"navbar-form navbar-left", role:"search" do  %>
+                <%= text_field_tag :search, params[:search], class:"form-control input-sm", placeholder:"Search"%>
+              <%= submit_tag "Search", class: "btn btn-info btn-sm "%>
+              <% end %>
+              <div class="pull-right sign-in-out">
+                <% if user_signed_in? %>
+                  <%= current_user.first_name %>
+                  |
+                <% else %>
+                  <%= link_to("Sign Up", new_user_path) %>
+                  |
+                  <%= link_to("Sign In", new_session_path) %>
+                <% end %>
+              </div>
+            </div>
+          </li>
           <% if user_signed_in? %>
-            <%= current_user.first_name %>
-            |
-            <%= link_to("Logout", sessions_path, method: :delete) %>
-          <% else %>
-            <%= link_to("Sign Up", new_user_path) %>
-              |
-            <%= link_to("Sign In", new_session_path) %>
-           <% end %>
-           <%= link_to "My Favourites", post_favourites_path(:post_id) %>
-        </div>
-      </div>
-    </li>
-  </ul>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="glyphicon glyphicon-cog"></i></a>
+            <ul class="dropdown-menu" aria-labelledby="dLabel">
+              <li><a href="#">Profile</a></li>
+              <li><a href="#">My Posts</a></li>
+              <li><% if user_signed_in? %>
+                <%= link_to "Favourited", post_favourites_path(:post_id) %>
+              <% end %></li>
+              <li role="separator" class="divider"></li>
+              <li>
+                <% if user_signed_in? %>
+                  <%= link_to("Logout", sessions_path, method: :delete) %>
+                <% end %>
+              </li>
+            </ul>
+          </li>
+          <% end %>
+        </ul>
+      </ul>
+    </div>
+  </div>
 </nav>

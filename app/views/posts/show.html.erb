@@ -1,73 +1,116 @@
-<h2>
+<h2 class= "post-resize">
   <% if user_signed_in? && @post.favourited_by?(current_user) %>
-    <%= link_to fa_icon("heart"), post_favourite_path(@post,
+    <%= link_to fa_icon("star"), post_favourite_path(@post,
                         @post.favourite_for(current_user)), method: :delete %>
   <% else %>
-    <%= link_to fa_icon("heart-o"), post_favourites_path(@post),
-                        method: :post, class: "icon-big" %>
+    <%= link_to fa_icon("star-o"), post_favourites_path(@post),
+                        method: :post %>
   <% end %>
   <%= @post.title %>
 </h2>
-<hr>
-<div>
-  <p><%= @post.body %></p>
-  Submitted <%= @post.created_at %> Ago
+<div class= "post-resize">
   <hr>
+  <p><%= @post.body %></p>
+  <hr>
+
   <!-- Tag -->
-<% if @post.tags.any? %>
-  Tagged with:
-  <% @post.tags.each do |tag| %>
-    <div class="label label-primary">
-      <%= tag.name %>
-    </div>
-  <% end %>
-<% end %>
-<br>
-  <% if @post.user %>
-    Created by:
-    <%= @post.user.full_name %>
+<div class="tags">
+  <% if @post.tags.any? %>
+    Tagged with:
+    <% @post.tags.each do |tag| %>
+      <div class="label label-primary" id="tags-show">
+        <%= tag.name %>
+      </div>
+    <% end %>
   <% end %>
 </div>
-<% if can? :edit, @post %>
-  <%= link_to "<i class='glyphicon glyphicon-pencil'></i> Edit".html_safe, edit_post_path(@post), class: "btn btn-info btn-sm" %>
-<% end %>
-<% if can? :delete, @post %>
-  <%= link_to "<i class='glyphicon glyphicon-remove'></i> Delete".html_safe, post_path(@post), {method: :delete, data: {confirm: "Are you sure ?"}, class: "btn btn-danger btn-sm"} %>
-<% end %>
 
-<!-- <h5>Vote Count: <%= @post.vote_counter %> </h5>
-  <div>
-    <%#if session[:has_voted] %>
-      You voted already!
-    <%#else %>
-    <%#= button_to "+", vote_up_post_path(@post) %>
-    <%# end %>
-  </div>
-  <div>
-    <%#if session[:has_voted] %>
-      You voted already!
-    <%# else %>
-    <%#= button_to "-", vote_down_post_path(@post), class:"btn-group btn-group-xs"  %>
-    <%# end %>
-  </div> -->
+<!-- Image -->
+   <p>
+    <% if @post.image.present? %>
+      <%= image_tag @post.image.url(:medium) %>
+    <% else %>
+      <p><i>No image available</i></p>
+    <% end %>
+  </p> 
 
-<%= form_for [@post, @comment] do |f| %>
-  <div class="form-group">
-    <%= f.label :body %>
-    <%= f.text_area :body, class: "form-control", placeholder: "Enter a comment here"%>
-  </div>
-  <div>
-    <%= f.submit class: "btn btn-primary btn-sm " %>
-  </div>
-<% end %>
+<br>
 
-<h4>Comments</h4>
-<% @post.comments.each do |comment| %>
-  <div class="well well-sm">
-    <%= comment.body %>
-    <% if can? :destroy, comment %>
-      <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe, post_comment_path(@post, comment), method: :delete, class: "btn comment-delete btn-xs",
-                                                data: {confirm: "Are you sure?"}) %>
+  <div class="created-by">
+    <% if @post.user %>
+      <p> Created by:
+      <%= @post.user.full_name %></p>
+      <% end %>
+    </p>
+  </div>
+</div>
+
+<div class="post-resize">
+  <% if can? :edit, @post %>
+    <%= link_to "<i class='glyphicon glyphicon-pencil'></i> Edit".html_safe, edit_post_path(@post), class: "btn btn-info btn-sm" %>
+  <% end %>
+  <% if can? :delete, @post %>
+    <%= link_to "<i class='glyphicon glyphicon-remove'></i> Delete".html_safe, post_path(@post), {method: :delete, data: {confirm: "Are you sure ?"}, class: "btn btn-danger btn-sm"} %>
+  <% end %>
+</div>
+
+<br>
+<div class="post-resize">
+  <%= form_for [@post, @comment] do |f| %>
+    <div class="form-group">
+      <%= f.label :body %>
+      <%= f.text_area :body, class: "form-control", placeholder: "Enter a comment here"%>
+    </div>
+    <div>
+      <%= f.submit class: "btn btn-primary btn-sm pull-right" %>
+    </div>
+  <% end %>
+</div>
+<br>
+<div class="post-resize">
+  <% if @post.comments.count < 5 %>
+    Comments
+    <% @post.comments.each do |comment| %>
+      <div class="comments comments-bg">
+        <% if can? :destroy, comment %>
+         <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe,
+                         post_comment_path(@post, comment), method: :delete,
+                         class: "comment-delete",
+                         data: {confirm: "Are you sure?"}) %>
+       <% end %>
+        <h4 class="user-name"><%= comment.user.first_name %></h4>
+          <p>
+            <%= comment.post.created_at.strftime("%B %d, %Y") %>
+          </p>
+          <p id="comments-body">
+            <%= comment.body %>
+          </p>
+      </div>
+      <% end %>
+    <% else %>
+  <button type="button" class="btn btn-info btn-xs" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Comments
+    <span class="badge"><%= @post.comments.count %></span>
+  </button>
+  <div class="collapse" id="collapseExample">
+    <% @post.comments.each do |comment| %>
+      <div class="comments comments-bg">
+        <% if can? :destroy, comment %>
+         <%= link_to("<i class='glyphicon glyphicon-remove'></i>".html_safe,
+                         post_comment_path(@post, comment), method: :delete,
+                         class: "comment-delete",
+                         data: {confirm: "Are you sure?"}) %>
+       <% end %>
+        <h4 class="user-name"><%= comment.user.first_name %></h4>
+          <p>
+            <%= comment.post.created_at.strftime("%B %d, %Y") %>
+          </p>
+          <p id="comments-body">
+            <%= comment.body %>
+          </p>
+      </div>
+      <% end %>
+    </div>
     <% end %>
   </div>
-  <% end %>
+</div>

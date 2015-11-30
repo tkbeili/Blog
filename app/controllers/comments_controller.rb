@@ -2,11 +2,12 @@ class CommentsController < ApplicationController
 before_action :authenticate_user, except:[:index, :show]
 
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.friendly.find(params[:post_id])
     @comment = Comment.new(find_params)
     @comment.user = current_user
     @comment.post = @post
     if @comment.save
+      CommentsMailer.notify_post_owner(@comment).deliver_now
       redirect_to post_path(@post), notice: "Comment added. Wee!"
     else
       flash[:alert] = @comment.errors.full_messages.join(", ")

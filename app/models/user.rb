@@ -7,6 +7,7 @@ class User < ActiveRecord::Base
   has_many :favourites, dependent: :destroy
   has_many :favourited_questions, through: :favourites, source: :question
 
+
 VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z]+)*\.[a-z]+\z/i
 # format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i, on: :create }
 

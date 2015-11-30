@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
 
+match "/delayed_job" => DelayedJobWeb, :anchor => false, via: [:get, :post]
+
+#Facebook login
+# get 'auth/:provider/callback', to: 'sessions#create'
+# get 'logout', to: 'sessions#destroy'
+
 resources :posts
 # get "/posts/new"        => "posts#new", as: :new_post
 # post "/posts"           => "posts#create", as: :posts

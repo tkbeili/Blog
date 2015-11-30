@@ -14,6 +14,12 @@ class Post < ActiveRecord::Base
   validates :title, presence: true
   validates :body, presence: true
 
+  mount_uploader :image, ImageUploader
+
+
+  extend FriendlyId
+  friendly_id :title, use: :slugged
+
   def self.search(search)
     if search
       where("title ILIKE? OR body ILIKE?", "%#{search}%", "%#{search}%")
@@ -30,8 +36,12 @@ class Post < ActiveRecord::Base
     favourites.find_by_user_id(user.id)
   end
 
-  after_initialize :set_default_vote_counter
+  # after_initialize :set_default_vote_counter
 
+  #for better params SEO
+  # def to_param
+  #   "#{id}-#{title}".parameterize
+  # end
 
   private
 

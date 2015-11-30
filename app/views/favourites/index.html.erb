@@ -1,7 +1,12 @@
-<h4>Favourited</h4>
-<% @favourites.each do |fav| %>
-  <div>
-    <%= link_to fav.post.title, post_path(fav.post_id) %>
-  </div>
-  <hr>
-<% end %>
+<h1>Favourited</h1>
+  <ol>
+    <% @favourites.each do |fav| %>
+    <li>
+      <h5 class="list-group-item-heading"><%= link_to fav.post.title, post_path(fav.post_id) %></h5>
+      <p class="list-group-item-text">
+        <%= fav.post.body.truncate(300) %>
+      </p>
+      <hr>
+    </li>
+    <% end %>
+  </ol>
